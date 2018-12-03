@@ -1,0 +1,7 @@
+*.log
+bin/
+.idea/
+*.bat
+lib/
+out/
+*.zip
