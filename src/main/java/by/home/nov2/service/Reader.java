@@ -1,6 +1,5 @@
 package main.java.by.home.nov2.service;
 
-import main.java.by.home.nov2.service.impl.IConsoleHandler;
 import main.java.by.home.nov2.utils.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

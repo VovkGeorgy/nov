@@ -1,7 +1,7 @@
-package main.java.by.home.nov2.entity;
+package main.java.by.home.nov2.entity.impl;
 
-import main.java.by.home.nov2.entity.impl.IText;
-import main.java.by.home.nov2.service.ConsoleHandler;
+import main.java.by.home.nov2.entity.IText;
+import main.java.by.home.nov2.service.impl.ConsoleHandler;
 import main.java.by.home.nov2.service.Reader;
 import main.java.by.home.nov2.service.TextParser;
 import main.java.by.home.nov2.service.Writer;
@@ -27,6 +27,7 @@ public class Text implements IText {
         if (textInstance == null) textInstance = new Text();
         return textInstance;
     }
+
     private static List<String> getTextList() {
         return textList;
     }

@@ -15,10 +15,10 @@ public class MainMenu {
     private static final int EXIT_M2 = 5;
 
     /**
-     * Show to user first menu
+     * Show to user Main menu
      * @return - complete first menu in StringBuilder
      */
-    public static StringBuilder getFirstMenu() {
+    public static StringBuilder getMainMenu() {
         StringBuilder stringBuilder1 = new StringBuilder("Choice: \n");
         stringBuilder1.append(INPUT_TEXT).append(".Input text \n");
         stringBuilder1.append(READ_FILE).append(".Read file \n");
@@ -27,10 +27,10 @@ public class MainMenu {
     }
 
     /**
-     * Show to user second menu
+     * Show to user Additional menu
      * @return - complete second menu in StringBuilder
      */
-    public static StringBuilder getSecondMenu() {
+    public static StringBuilder getAdditionalMenu() {
         StringBuilder stringBuilder2 = new StringBuilder("Choice: \n");
         stringBuilder2.append(CONTINUE_TEXT_INPUT).append(".Continue text input \n");
         stringBuilder2.append(WRITE_FILE).append(".Write file \n");

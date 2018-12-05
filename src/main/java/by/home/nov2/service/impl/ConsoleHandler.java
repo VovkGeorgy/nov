@@ -1,7 +1,7 @@
-package main.java.by.home.nov2.service;
+package main.java.by.home.nov2.service.impl;
 
 import main.java.by.home.nov2.entity.MainMenu;
-import main.java.by.home.nov2.entity.Text;
+import main.java.by.home.nov2.entity.impl.Text;
 import main.java.by.home.nov2.utils.ConsoleUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +34,7 @@ public class ConsoleHandler {
      */
     public void processFirstRequest() {
         LOGGER.debug("Getting first response");
-        System.out.println(MainMenu.getFirstMenu());
+        System.out.println(MainMenu.getMainMenu());
         switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processFirstRequest)) {
             case INPUT_TEXT:
                 textInstance.addText();
@@ -57,7 +57,7 @@ public class ConsoleHandler {
      */
     private void processSecondRequest() {
         LOGGER.debug("Getting second response");
-        System.out.println(MainMenu.getSecondMenu());
+        System.out.println(MainMenu.getAdditionalMenu());
         switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processSecondRequest)) {
             case CONTINUE_TEXT_INPUT:
                 textInstance.addText();

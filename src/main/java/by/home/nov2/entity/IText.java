@@ -1,4 +1,4 @@
-package main.java.by.home.nov2.entity.impl;
+package main.java.by.home.nov2.entity;
 
 public interface IText {
 

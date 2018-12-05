@@ -40,5 +40,6 @@ public class Writer {
         } catch (IOException ex) {
             LOGGER.error("File not write" + ex.getMessage());
         }
+        LOGGER.debug("File successfully created!" + outFilePath);
     }
 }
