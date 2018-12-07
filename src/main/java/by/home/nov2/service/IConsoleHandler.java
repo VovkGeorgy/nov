@@ -5,6 +5,9 @@ package main.java.by.home.nov2.service;
  */
 public interface IConsoleHandler {
 
+    /**
+     * Method who keep link to overrided methods
+     */
     void processRequest();
 
 }

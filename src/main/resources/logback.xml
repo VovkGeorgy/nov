@@ -1,27 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <!--Аппендеры -->
     <!--Файловый аппендер -->
     <appender name="file" class="ch.qos.logback.core.FileAppender">
-        <!--<file>D:\Prog\projects\Idea_projects\nov2\src\main\resources\logs\novLog.log</file>-->
         <file>./bin/main/resources/logs/novLog.log</file>
         <layout class="ch.qos.logback.classic.PatternLayout">
             <Pattern>%date %level [%thread] %logger{10} [%file:%line] %msg%n</Pattern>
         </layout>
     </appender>
-    <!--Консольный аппендер -->
-    <!--<appender name="sout" class="ch.qos.logback.core.ConsoleAppender">-->
-        <!--<layout class="ch.qos.logback.classic.PatternLayout">-->
-            <!--<Pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</Pattern>-->
-        <!--</layout>-->
-    <!--</appender>-->
-    <!-- Логгеры -->
     <!-- Корневой логгер -->
     <root level="debug">
         <appender-ref ref="file" />
     </root>
-    <!-- Логгер нашего класса  -->
-    <!--<logger name="logging.logback.LoggingLogback" level="debug" >-->
-        <!--<appender-ref ref="file" />-->
-    <!--</logger>-->
 </configuration>

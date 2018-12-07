@@ -16,55 +16,62 @@ import java.util.List;
  * Class of text entity it consist of text in List format, and methods to do something with it.
  */
 public class Text implements IText {
-
-    private static List<String> textList = new ArrayList<>();
-
+    private List<String> textList = new ArrayList<>();
     private static Text textInstance;
-
-    private static ConsoleHandler consoleHandlerInstance = ConsoleHandler.getInstance();
+    private ConsoleHandler consoleHandlerInstance = ConsoleHandler.getInstance();
+    private TextParser textParser = TextParser.getInstance();
+    private Reader reader = Reader.getInstance();
+    private Writer writer = Writer.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(Text.class);
+
     public static Text getInstance() {
         if (textInstance == null) textInstance = new Text();
         return textInstance;
     }
 
-    private static List<String> getTextList() {
+    private List<String> getTextList() {
         return textList;
     }
 
-    private static void setTextList(List<String> textList) {
-        Text.textList = textList;
+    private void setTextList(List<String> textList) {
+        this.textList = textList;
     }
 
     @Override
     public void addText() {
         System.out.println("Write Line:");
-        textList.addAll(TextParser.parsLine(ConsoleUtils.getLineFromConsole(textInstance::addText)));
+        LOGGER.debug("Add text from console to List");
+        textList.addAll(textParser.parsLine(ConsoleUtils.getLineFromConsole(textInstance::addText)));
     }
 
     @Override
     public void readFromFile() {
-        TextParser.parsFile(Reader.readFile(consoleHandlerInstance::processFirstRequest, getTextFileName()), getTextList());
+        LOGGER.debug("Add text from file to list");
+        textParser.parsFile(reader.readFile(consoleHandlerInstance::processMainMenuRequest, getTextFileName()), getTextList());
     }
 
     @Override
     public void writeInFile() {
-        Writer.writeFile(getTextList(), getTextFileName());
+        LOGGER.debug("Write text in file");
+        writer.writeFile(getTextList(), getTextFileName());
     }
 
     @Override
-    public void writeInConsole() {
+    public void printInConsole() {
+        LOGGER.debug("Write text in console");
         getTextList().forEach(System.out::println);
     }
 
     @Override
     public void addCats() {
-        setTextList(TextParser.addCatInText(textList));
+        LOGGER.debug("Add cats to text");
+        setTextList(textParser.addCatInText(textList));
     }
 
     @Override
     public String getTextFileName() {
         System.out.println("Write file name");
-        return ConsoleUtils.getLineFromConsole(consoleHandlerInstance::processFirstRequest);
+        LOGGER.debug("Get text file name from console");
+        return ConsoleUtils.getLineFromConsole(consoleHandlerInstance::processMainMenuRequest);
     }
 }
