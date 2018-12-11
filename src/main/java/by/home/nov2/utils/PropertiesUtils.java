@@ -19,12 +19,12 @@ public class PropertiesUtils {
     private static Properties appProps = new Properties();
     public static Map<String, String> props = new HashMap<>();
 
-    private static final String WORDS_SPLITTER = "words.splitter";
-    private static final String TEXT_SEPARATOR = "text.separator";
-    private static final String CAT = "cat";
-    private static final String WORDS_IN_LINE = "words.in.line.limit";
-    private static final String FILE_OUT_PATH = "file.out.path";
-    private static final String FILE_IN_PATH = "file.in.path";
+    public static final String WORDS_SPLITTER = "words.splitter";
+    public static final String TEXT_SEPARATOR = "text.separator";
+    public static final String CAT = "cat";
+    public static final String WORDS_IN_LINE = "words.in.line.limit";
+    public static final String FILE_OUT_PATH = "file.out.path";
+    public static final String FILE_IN_PATH = "file.in.path";
 
     static {
         LOGGER.debug("Initialise properties");

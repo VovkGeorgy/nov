@@ -1,12 +1,13 @@
 package main.java.by.home.nov2.entity;
 
 /**
- * interface represents main menu in stringBuilder
+ * interface represents main menu as stringBuilder
  */
 public interface IMenu {
 
     /**
-     * Return menu in stringBuilder
+     * Return menu as stringBuilder
+     *
      * @return - complete menu in StringBuilder
      */
     StringBuilder getMenu();

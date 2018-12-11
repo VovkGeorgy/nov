@@ -9,6 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
+import static main.java.by.home.nov2.utils.PropertiesUtils.TEXT_SEPARATOR;
+import static main.java.by.home.nov2.utils.PropertiesUtils.WORDS_IN_LINE;
+
 /**
  * This class only write file
  */
@@ -36,11 +39,11 @@ public class Writer {
     public void writeFile(List<String> listOfWords, String fileName) {
         String outFilePath = FilesUtils.getOutputFilePath(fileName);
         try (FileWriter writer = new FileWriter(outFilePath, true)) {
-            LOGGER.debug("Start writing file to path", outFilePath);
+            LOGGER.debug("Start writing file to path {}", outFilePath);
             writeWords(listOfWords, writer);
             System.out.println("File successfully writed!");
         } catch (IOException ex) {
-            LOGGER.error("File {} not write");
+            LOGGER.error("File not write {}", outFilePath);
         }
         LOGGER.debug("File {} successfully writed!", outFilePath);
     }
@@ -53,10 +56,12 @@ public class Writer {
      * @throws IOException - Exception of incorrect output
      */
     private void writeWords(List<String> listOfWords, FileWriter writer) throws IOException {
+        final int wordsLimit = Integer.parseInt(PropertiesUtils.props.get(WORDS_IN_LINE));
+        final String delimiter = PropertiesUtils.props.get(TEXT_SEPARATOR);
         for (String word : listOfWords) {
-            if (skipVar < Integer.parseInt(PropertiesUtils.props.get("words.in.line.limit"))) {
+            if (skipVar < wordsLimit) {
                 writer.write(word);
-                writer.append(PropertiesUtils.props.get("text.separator"));
+                writer.append(delimiter);
                 skipVar++;
             } else {
                 writer.append("\n");

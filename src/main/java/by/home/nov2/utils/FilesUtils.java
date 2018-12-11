@@ -3,6 +3,9 @@ package main.java.by.home.nov2.utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static main.java.by.home.nov2.utils.PropertiesUtils.FILE_IN_PATH;
+import static main.java.by.home.nov2.utils.PropertiesUtils.FILE_OUT_PATH;
+
 /**
  * Class with file utilities
  */
@@ -17,8 +20,8 @@ public class FilesUtils {
      * @return - the whole path to named file
      */
     public static String getInputFilePath(String fileName) {
-        LOGGER.debug("Get path from named file", fileName);
-        return PropertiesUtils.props.get("file.in.path") + fileName + ".txt";
+        LOGGER.debug("Get path from named file {}", fileName);
+        return PropertiesUtils.props.get(FILE_IN_PATH) + fileName + ".txt";
     }
 
     /**
@@ -28,7 +31,7 @@ public class FilesUtils {
      * @return - out file path
      */
     public static String getOutputFilePath(String fileName) {
-        LOGGER.debug("Get file name from property", fileName);
-        return PropertiesUtils.props.get("file.out.path") + fileName + ".txt";
+        LOGGER.debug("Get file {} name from property", fileName);
+        return PropertiesUtils.props.get(FILE_OUT_PATH) + fileName + ".txt";
     }
 }

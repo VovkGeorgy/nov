@@ -8,6 +8,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static main.java.by.home.nov2.utils.PropertiesUtils.*;
+
 /**
  * Class parse line or file to List of words, and add cats to text
  */
@@ -33,7 +35,7 @@ public class TextParser {
      */
     public List<String> parsLine(String line) {
         LOGGER.debug("parse line from console");
-        return Arrays.asList(line.split(PropertiesUtils.props.get("words.splitter")));
+        return Arrays.asList(line.split(PropertiesUtils.props.get(WORDS_SPLITTER)));
     }
 
     /**
@@ -44,7 +46,7 @@ public class TextParser {
      */
     public void parsFile(List<String> listOfFileLines, List<String> listOfWords) {
         LOGGER.debug("parse file from system");
-        listOfFileLines.forEach(line -> listOfWords.addAll(Arrays.asList(line.split(PropertiesUtils.props.get("text.separator")))));
+        listOfFileLines.forEach(line -> listOfWords.addAll(Arrays.asList(line.split(PropertiesUtils.props.get(TEXT_SEPARATOR)))));
     }
 
     /**
@@ -55,7 +57,7 @@ public class TextParser {
      */
     public List<String> addCatInText(List<String> listOfWords) {
         LOGGER.debug("Add cats to text");
-        return listOfWords.stream().distinct().map((word) -> word + "_" + PropertiesUtils.props.get("cat")).collect(Collectors.toList());
+        final String catWord = PropertiesUtils.props.get(CAT);
+        return listOfWords.stream().distinct().map((word) -> String.join("_", word, catWord)).collect(Collectors.toList());
     }
-
 }

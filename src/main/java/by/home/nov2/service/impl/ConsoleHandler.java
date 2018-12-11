@@ -12,14 +12,6 @@ import org.slf4j.LoggerFactory;
  * Class process users requests from console and call needed methods
  */
 public class ConsoleHandler {
-    private static final int INPUT_TEXT = 1;
-    private static final int READ_FILE = 2;
-    private static final int EXIT_MAIN_MENU = 3;
-    private static final int CONTINUE_TEXT_INPUT = 1;
-    private static final int WRITE_FILE = 2;
-    private static final int PRINT_IN_CONSOLE = 3;
-    private static final int ADD_CATS = 4;
-    private static final int EXIT_TEXT_CONVERSION_MENU = 5;
     private static ConsoleHandler consoleHandlerInstance;
     private static Text textInstance = Text.getInstance();
     private static MainMenu mainMenuInstance = MainMenu.getInstance();
@@ -39,13 +31,13 @@ public class ConsoleHandler {
         LOGGER.debug("Processing Main Menu request");
         System.out.println(mainMenuInstance.getMenu());
         switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processMainMenuRequest)) {
-            case INPUT_TEXT:
+            case MainMenu.INPUT_TEXT:
                 textInstance.addText();
                 break;
-            case READ_FILE:
+            case MainMenu.READ_FILE:
                 textInstance.readFromFile();
                 break;
-            case EXIT_MAIN_MENU:
+            case MainMenu.EXIT:
                 System.exit(111);
                 break;
             default:
@@ -62,19 +54,19 @@ public class ConsoleHandler {
         LOGGER.debug("Processing Converting Menu request");
         System.out.println(convertingMenuInstance.getMenu());
         switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processConvertingMenuRequest)) {
-            case CONTINUE_TEXT_INPUT:
+            case ConvertingMenu.CONTINUE_TEXT_INPUT:
                 textInstance.addText();
                 break;
-            case WRITE_FILE:
+            case ConvertingMenu.WRITE_FILE:
                 textInstance.writeInFile();
                 break;
-            case PRINT_IN_CONSOLE:
+            case ConvertingMenu.PRINT_IN_CONSOLE:
                 textInstance.printInConsole();
                 break;
-            case ADD_CATS:
+            case ConvertingMenu.ADD_CATS:
                 textInstance.addCats();
                 break;
-            case EXIT_TEXT_CONVERSION_MENU:
+            case ConvertingMenu.EXIT:
                 System.exit(222);
                 break;
             default:

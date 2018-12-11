@@ -7,7 +7,6 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        ConsoleHandler consoleHandler = ConsoleHandler.getInstance();
-        consoleHandler.processMainMenuRequest();
+        ConsoleHandler.getInstance().processMainMenuRequest();
     }
 }

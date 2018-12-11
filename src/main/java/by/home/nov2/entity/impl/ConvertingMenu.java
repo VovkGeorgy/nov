@@ -6,11 +6,11 @@ import main.java.by.home.nov2.entity.IMenu;
  * Class represents converting menu for console output
  */
 public class ConvertingMenu implements IMenu {
-    private static final int CONTINUE_TEXT_INPUT = 1;
-    private static final int WRITE_FILE = 2;
-    private static final int PRINT_IN_CONSOLE = 3;
-    private static final int ADD_CATS = 4;
-    private static final int EXIT = 5;
+    public static final int CONTINUE_TEXT_INPUT = 1;
+    public static final int WRITE_FILE = 2;
+    public static final int PRINT_IN_CONSOLE = 3;
+    public static final int ADD_CATS = 4;
+    public static final int EXIT = 5;
     private static ConvertingMenu convertingMenuInstance;
 
     public static ConvertingMenu getInstance() {

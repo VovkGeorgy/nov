@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Class of text entity it consist of text in List format, and methods to do something with it.
  */
+//TODO: make it as service
 public class Text implements IText {
     private List<String> textList = new ArrayList<>();
     private static Text textInstance;

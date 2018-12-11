@@ -31,7 +31,7 @@ public class ConsoleUtils {
             if (inputLine.trim().equals("")) throw new InputMismatchException();
         } catch (IOException | RuntimeException ex) {
             System.out.println("Bad input, try again. Error - " + ex.getMessage());
-            LOGGER.error("Bad input in console", inputLine, ex.getMessage());
+            LOGGER.error("Bad input in console {}", inputLine, ex.getMessage());
             method.processRequest();
         }
         return inputLine;
@@ -49,7 +49,7 @@ public class ConsoleUtils {
             inputInt = Integer.parseInt(reader.readLine());
         } catch (InputMismatchException | IOException ex) {
             System.out.println("Bad input, try again");
-            LOGGER.error("bad input in console", inputInt);
+            LOGGER.error("bad input in console {}", inputInt);
             method.processRequest();
         }
         return inputInt;

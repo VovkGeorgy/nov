@@ -35,18 +35,18 @@ public class Reader {
      * @return - List of lines from readed file
      */
     public List<String> readFile(IConsoleHandler method, String fileName) {
-        String filePath = FilesUtils.getInputFilePath(fileName );
-        LOGGER.debug("Reading file from path", filePath);
+        String filePath = FilesUtils.getInputFilePath(fileName);
+        LOGGER.debug("Reading file from path {}", filePath);
         try {
             return Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
         } catch (NullPointerException e) {
-            LOGGER.error("File is null", filePath);
+            LOGGER.error("File {} does not exist", filePath);
             method.processRequest();
         } catch (IOException e) {
-            LOGGER.error("Cant read file", filePath);
+            LOGGER.error("Cant read file {}", filePath);
             method.processRequest();
         }
-        LOGGER.debug("File successfully readed", filePath);
+        LOGGER.debug("File successfully readed {}", filePath);
         System.out.println("File successfully read!");
         return null;
     }
