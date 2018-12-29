@@ -1,5 +1,8 @@
 package main.java.by.home.nov2.entity;
 
+/**
+ * Interface Text, with main operations for text entity
+ */
 public interface IText {
 
     /**
@@ -20,7 +23,7 @@ public interface IText {
     /**
      * Write text from memory into console
      */
-    void writeInConsole();
+    void printInConsole();
 
     /**
      * Add cats in text

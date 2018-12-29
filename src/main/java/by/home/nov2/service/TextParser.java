@@ -1,6 +1,6 @@
 package main.java.by.home.nov2.service;
 
-import main.java.by.home.nov2.utils.PropertyUtils;
+import main.java.by.home.nov2.utils.PropertiesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,40 +8,56 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static main.java.by.home.nov2.utils.PropertiesUtils.*;
+
 /**
- * Class pars line or file to List of words, and add cats to text
+ * Class parse line or file to List of words, and add cats to text
  */
 public class TextParser {
-    private static final Logger LOGGER = LoggerFactory.getLogger(PropertyUtils.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(TextParser.class);
+    private static TextParser textParserInstance;
 
     /**
-     * Method pars line from console
-     * @param line - input line
-     * @return - List of parsed words
+     * Method get instance of TextParser class, if null method create it
+     *
+     * @return - text Parser Instance
      */
-    public static List<String> parsLine(String line) {
-        LOGGER.debug("Pars line from console");
-        return Arrays.asList(line.split(PropertyUtils.props.get("words.splitter")));
+    public static TextParser getInstance() {
+        if (textParserInstance == null) textParserInstance = new TextParser();
+        return textParserInstance;
     }
 
     /**
-     * Method pars file from system
-     * @param listOfFileLines - List of file lines
-     * @param listOfWords - list of words in which it pars
+     * Method parse line from console
+     *
+     * @param line - input line
+     * @return - List of parsed words
      */
-    public static void parsFile(List<String> listOfFileLines, List<String> listOfWords) {
-        LOGGER.debug("Pars file from system");
-        listOfFileLines.forEach(line -> listOfWords.addAll(Arrays.asList(line.split(PropertyUtils.props.get("text.separator")))));
+    public List<String> parsLine(String line) {
+        LOGGER.debug("parse line from console");
+        return Arrays.asList(line.split(PropertiesUtils.props.get(WORDS_SPLITTER)));
+    }
+
+    /**
+     * Method parse file from system
+     *
+     * @param listOfFileLines - List of file lines
+     * @param listOfWords     - list of words in which it parse
+     */
+    public void parsFile(List<String> listOfFileLines, List<String> listOfWords) {
+        LOGGER.debug("parse file from system");
+        listOfFileLines.forEach(line -> listOfWords.addAll(Arrays.asList(line.split(PropertiesUtils.props.get(TEXT_SEPARATOR)))));
     }
 
     /**
      * Method add cats to text in format "word_cat"
+     *
      * @param listOfWords = list of words
      * @return - changed text with cats
      */
-    public static List<String> addCatInText(List<String> listOfWords) {
+    public List<String> addCatInText(List<String> listOfWords) {
         LOGGER.debug("Add cats to text");
-        return listOfWords.stream().distinct().map((e) -> e + "_" + PropertyUtils.props.get("cat")).collect(Collectors.toList());
+        final String catWord = PropertiesUtils.props.get(CAT);
+        return listOfWords.stream().distinct().map((word) -> String.join("_", word, catWord)).collect(Collectors.toList());
     }
-
 }

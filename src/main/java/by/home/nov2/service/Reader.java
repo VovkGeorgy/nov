@@ -1,6 +1,6 @@
 package main.java.by.home.nov2.service;
 
-import main.java.by.home.nov2.utils.FileUtils;
+import main.java.by.home.nov2.utils.FilesUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,24 +15,38 @@ import java.util.List;
  */
 public class Reader {
     private static final Logger LOGGER = LoggerFactory.getLogger(Reader.class);
+    private static Reader readerInstance;
+
+    /**
+     * Method get instance of class, if null method create it
+     *
+     * @return - instance
+     */
+    public static Reader getInstance() {
+        if (readerInstance == null) readerInstance = new Reader();
+        return readerInstance;
+    }
 
     /**
      * Method read file from file system
-     * @param method - method which must call in the case of error
+     *
+     * @param method   - method which must call in the case of error
      * @param fileName - name of file
      * @return - List of lines from readed file
      */
-    public static List<String> readFile(IConsoleHandler method, String fileName) {
-        String filePath = FileUtils.getFilePath(fileName + ".txt");
-        LOGGER.debug("Reading file from path: " + filePath);
+    public List<String> readFile(IConsoleHandler method, String fileName) {
+        String filePath = FilesUtils.getInputFilePath(fileName);
+        LOGGER.debug("Reading file from path {}", filePath);
         try {
             return Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8);
+        } catch (NullPointerException e) {
+            LOGGER.error("File {} does not exist", filePath);
+            method.processRequest();
         } catch (IOException e) {
-            LOGGER.error("Cant read file" + e.getMessage());
-        } catch (NullPointerException nulll) {
-            LOGGER.error("Cant read file, null");
+            LOGGER.error("Cant read file {}", filePath);
+            method.processRequest();
         }
-        LOGGER.debug("File successfully readed");
+        LOGGER.debug("File successfully readed {}", filePath);
         System.out.println("File successfully read!");
         return null;
     }

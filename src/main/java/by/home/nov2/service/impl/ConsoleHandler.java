@@ -1,6 +1,7 @@
 package main.java.by.home.nov2.service.impl;
 
-import main.java.by.home.nov2.entity.MainMenu;
+import main.java.by.home.nov2.entity.impl.ConvertingMenu;
+import main.java.by.home.nov2.entity.impl.MainMenu;
 import main.java.by.home.nov2.entity.impl.Text;
 import main.java.by.home.nov2.utils.ConsoleUtils;
 import org.slf4j.Logger;
@@ -11,16 +12,10 @@ import org.slf4j.LoggerFactory;
  * Class process users requests from console and call needed methods
  */
 public class ConsoleHandler {
-    private static final int INPUT_TEXT = 1;
-    private static final int READ_FILE = 2;
-    private static final int EXIT_M1 = 3;
-    private static final int CONTINUE_TEXT_INPUT = 1;
-    private static final int WRITE_FILE = 2;
-    private static final int WRITE_IN_CONSOLE = 3;
-    private static final int ADD_CATS = 4;
-    private static final int EXIT_M2 = 5;
     private static ConsoleHandler consoleHandlerInstance;
     private static Text textInstance = Text.getInstance();
+    private static MainMenu mainMenuInstance = MainMenu.getInstance();
+    private static ConvertingMenu convertingMenuInstance = ConvertingMenu.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(ConsoleHandler.class);
 
     public static ConsoleHandler getInstance() {
@@ -30,55 +25,54 @@ public class ConsoleHandler {
 
 
     /**
-     * Method process first request from user
+     * Method process request from user in Main menu
      */
-    public void processFirstRequest() {
-        LOGGER.debug("Getting first response");
-        System.out.println(MainMenu.getMainMenu());
-        switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processFirstRequest)) {
-            case INPUT_TEXT:
+    public void processMainMenuRequest() {
+        LOGGER.debug("Processing Main Menu request");
+        System.out.println(mainMenuInstance.getMenu());
+        switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processMainMenuRequest)) {
+            case MainMenu.INPUT_TEXT:
                 textInstance.addText();
                 break;
-            case READ_FILE:
+            case MainMenu.READ_FILE:
                 textInstance.readFromFile();
                 break;
-            case EXIT_M1:
+            case MainMenu.EXIT:
                 System.exit(111);
                 break;
             default:
                 System.out.println("Wrong input");
-                processFirstRequest();
+                processMainMenuRequest();
         }
-        processSecondRequest();
+        processConvertingMenuRequest();
     }
 
     /**
-     * Method process subsequent requests from user
+     * Method process requests from user in text conversion menu
      */
-    private void processSecondRequest() {
-        LOGGER.debug("Getting second response");
-        System.out.println(MainMenu.getAdditionalMenu());
-        switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processSecondRequest)) {
-            case CONTINUE_TEXT_INPUT:
+    private void processConvertingMenuRequest() {
+        LOGGER.debug("Processing Converting Menu request");
+        System.out.println(convertingMenuInstance.getMenu());
+        switch (ConsoleUtils.getIntFromConsole(consoleHandlerInstance::processConvertingMenuRequest)) {
+            case ConvertingMenu.CONTINUE_TEXT_INPUT:
                 textInstance.addText();
                 break;
-            case WRITE_FILE:
+            case ConvertingMenu.WRITE_FILE:
                 textInstance.writeInFile();
-                System.exit(222);
                 break;
-            case WRITE_IN_CONSOLE:
-                textInstance.writeInConsole();
+            case ConvertingMenu.PRINT_IN_CONSOLE:
+                textInstance.printInConsole();
                 break;
-            case ADD_CATS:
+            case ConvertingMenu.ADD_CATS:
                 textInstance.addCats();
                 break;
-            case EXIT_M2:
+            case ConvertingMenu.EXIT:
                 System.exit(222);
                 break;
             default:
                 System.out.println("Wrong input");
-                processSecondRequest();
+                processConvertingMenuRequest();
         }
-        processSecondRequest();
+        processConvertingMenuRequest();
     }
 }
